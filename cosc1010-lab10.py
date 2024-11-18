@@ -13,7 +13,7 @@
 # 11/16/2024
 
 
-#import modules you will need 
+#import modules you will need
 
 from hashlib import sha256 
 from pathlib import Path
