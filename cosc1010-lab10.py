@@ -3,10 +3,15 @@
 # 11/18/2024
 # Lab 10
 # Lab Section: 14
-# Sources, people worked with, help given to: 
-# your
-# comments
-# here
+# Sources, people worked with, help given to: Textbook Chapter: 8, 10
+# COSC1010_lec11-Functions.pptx.pdf,COSC1010_lec13-FilesAndExceptions.pptx.pdf
+# https://docs.python.org/3/tutorial/errors.html (where I learned use "except Excetption as e:"" block)
+# Online tutor, 
+#  ChatGPT, "give me tips on opening the file to get the target , 
+# then opening and reading txt file to hash each password and 
+# comparing it with the target , using try-except blocks for error handling (no code) " 
+# 11/16/2024
+
 
 #import modules you will need 
 
@@ -47,17 +52,16 @@ def get_hash(to_hash):
 from hashlib import sha256
 from pathlib import Path
 
-# Given function to hash passwords using SHA-256
+
 def get_hash(to_hash):
     """Generate SHA-256 hash of a string."""
     return sha256(to_hash.encode('utf-8')).hexdigest().upper()
 
-# Function to crack the password by comparing hashes
+#Created a function to crack the password by comparing hashes
 def crack_password():
-    # Try to open the 'hash' file and read the hashed password
     try:
         with open('hash', 'r') as file:
-            target_hash = file.read().strip()  # Read the hash and remove any extra whitespace/newlines
+            target_hash = file.read().strip()  
     except FileNotFoundError:
         print("Error: The 'hash' file was not found.")
         return
@@ -69,15 +73,14 @@ def crack_password():
     try:
         with open('rockyou.txt', 'r', encoding='utf-8', errors='ignore') as password_file:
             for line in password_file:
-                password = line.strip()  # Remove leading/trailing whitespaces, including newlines
-                hashed_password = get_hash(password)  # Hash the password
-                if hashed_password == target_hash:  # Compare the hash with the target
+                password = line.strip()  
+                hashed_password = get_hash(password)  
+                if hashed_password == target_hash:  
                     print(f"Password found: {password}")
-                    return  # Exit once the password is found
+                    return  
     except FileNotFoundError:
         print("Error: The 'rockyou.txt' file was not found.")
     except Exception as e:
         print(f"An error occurred while reading the 'rockyou.txt' file: {e}")
 
-# Calling the function to crack the password
 crack_password()
